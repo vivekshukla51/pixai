@@ -27,6 +27,7 @@ import {
   Image as ImageIcon,
 } from "lucide-react";
 import { upload } from "@imagekit/next";
+import crypto from "crypto";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -156,7 +157,7 @@ export default function Home() {
     );
   }, []);
 
-  const onDrop = useCallback(async (acceptedFiles: File[]) => {
+  const onDrop = async (acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
     if (file) {
       setUploadedImage(file);
@@ -171,9 +172,21 @@ export default function Home() {
       // Upload to ImageKit using the official SDK
       setIsUploading(true);
       try {
-        // Get fresh authentication parameters with cache busting
-        const timestamp = Date.now();
-        const authResponse = await fetch(`/api/upload-auth?t=${timestamp}`);
+        // Get fresh authentication parameters with unique request data
+        const uniqueData = {
+          timestamp: Date.now(),
+          fileId: crypto.randomUUID(),
+          fileName: file.name
+        };
+        
+        const authResponse = await fetch("/api/upload-auth", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(uniqueData)
+        });
+        
         if (!authResponse.ok) {
           throw new Error("Failed to get upload authentication");
         }
@@ -211,7 +224,7 @@ export default function Home() {
         setIsUploading(false);
       }
     }
-  }, []);
+  };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
