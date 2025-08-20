@@ -27,7 +27,6 @@ import {
   Image as ImageIcon,
 } from "lucide-react";
 import { upload } from "@imagekit/next";
-import crypto from "crypto";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
