@@ -8,8 +8,8 @@ import { fontSans, fontHeading, fontDisplay } from "@/config/fonts";
 
 export const metadata: Metadata = {
   title: {
-    default: "ImageKit Transform",
-    template: `%s - ImageKit Transform`,
+    default: "PixAI",
+    template: `%s - PixAI`,
   },
   description:
     "Upload, transform, and optimize your images with AI-powered tools. Resize, crop, remove backgrounds, and more with URL-based transformations.",
