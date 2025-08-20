@@ -1,20 +1,24 @@
 // @ts-nocheck
 import { getUploadAuthParams } from "@imagekit/next/server";
+import crypto from "crypto";
 
 export async function GET() {
   try {
+    // Generate a unique token manually to prevent reuse
+    const uniqueToken = crypto.randomUUID();
+    
     // Generate authentication parameters using ImageKit SDK
-    const { token, expire, signature } = getUploadAuthParams({
+    const { expire, signature } = getUploadAuthParams({
       privateKey: process.env.IMAGEKIT_PRIVATE_KEY as string,
       publicKey: process.env.IMAGEKIT_PUBLIC_KEY as string,
       // Set expire to 30 minutes from now (1800 seconds)
       expire: Math.floor(Date.now() / 1000) + 1800,
-      // Add unique identifier to prevent token reuse
-      fileName: `upload_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      // Use our custom unique token
+      token: uniqueToken,
     });
 
     return Response.json({
-      token,
+      token: uniqueToken,
       expire,
       signature,
       publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
