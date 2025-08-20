@@ -22,6 +22,12 @@ export async function GET() {
       expire,
       signature,
       publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
+    }, {
+      headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      }
     });
   } catch (error) {
     console.error("Upload auth error:", error);

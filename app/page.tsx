@@ -171,8 +171,9 @@ export default function Home() {
       // Upload to ImageKit using the official SDK
       setIsUploading(true);
       try {
-        // Get authentication parameters
-        const authResponse = await fetch("/api/upload-auth");
+        // Get fresh authentication parameters with cache busting
+        const timestamp = Date.now();
+        const authResponse = await fetch(`/api/upload-auth?t=${timestamp}`);
         if (!authResponse.ok) {
           throw new Error("Failed to get upload authentication");
         }
