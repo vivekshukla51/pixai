@@ -382,8 +382,8 @@ export default function Home() {
 
       <div className="container mx-auto px-4 py-12 max-w-6xl">
         {activeSection === "features" ? (
-          /* Features Section */
           <div className="space-y-16">
+            {/* Features Section */}
             {/* Hero Section */}
             <div className="text-center space-y-8">
               <h1 className="text-5xl md:text-7xl font-bold leading-tight">
@@ -443,8 +443,8 @@ export default function Home() {
             </div>
           </div>
         ) : (
-          /* AI Studio Section */
           <div className="space-y-8">
+            {/* AI Studio Section */}
             {/* Studio Header */}
                          <div className="flex items-center justify-between">
                <div className="flex items-center space-x-4">
@@ -457,7 +457,6 @@ export default function Home() {
             </div>
 
             {!uploadedImage ? (
-              /* Upload State */
               <Card className="bg-gray-900 border-gray-800">
                 <CardContent className="p-8">
                   <div
@@ -506,7 +505,6 @@ export default function Home() {
                 </CardContent>
               </Card>
             ) : isProcessing ? (
-              /* Processing State */
               <Card className="bg-gray-900 border-gray-800">
                 <CardContent className="p-8 text-center">
                   <div className="w-16 h-16 mx-auto bg-gradient-to-r from-gray-600 to-gray-800 rounded-full flex items-center justify-center mb-6">
@@ -524,7 +522,6 @@ export default function Home() {
                 </CardContent>
               </Card>
             ) : (
-              /* Main Interface */
               <div className="space-y-8">
                 {/* Image and Controls */}
                 <div className="grid lg:grid-cols-2 gap-8">
